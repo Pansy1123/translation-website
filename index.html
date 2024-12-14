@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRANS Pro</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TRANS Pro</h1>
+            <div class="language-toggle">
+                <button class="active">中译英</button>
+                <button>英译中</button>
+            </div>
+        </header>
+
+        <div class="translation-styles">
+            <button class="style-btn active">标准本土化</button>
+            <button class="style-btn">幽默游戏化</button>
+            <button class="style-btn">学术严谨化</button>
+            <button class="style-btn">正式官方化</button>
+            <button class="style-btn">口语化</button>
+        </div>
+
+        <main>
+            <div class="translation-container">
+                <div class="input-section">
+                    <textarea placeholder="请输入要翻译的文本..."></textarea>
+                </div>
+                <button class="translate-btn">Duang~</button>
+                <div class="output-section">
+                    <textarea readonly placeholder="翻译结果将在这里显示..."></textarea>
+                </div>
+            </div>
+        </main>
+
+        <div class="history-section">
+            <h2>翻译历史</h2>
+            <div class="history-list">
+                <!-- 历史记录将在这里动态生成 -->
+            </div>
+            <div class="pagination">
+                <button>&lt;</button>
+                <span>1 / 1</span>
+                <button>&gt;</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
