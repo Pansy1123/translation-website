@@ -47,12 +47,35 @@ class TranslationApp {
         this.elements.closeModal.addEventListener('click', () => this.hideHistoryModal());
     }
 
+    handleStyleToggle(button) {
+        // 移除所有按钮的active类
+        this.elements.styleButtons.forEach(btn => btn.classList.remove('active'));
+        // 给点击的按钮添加active类
+        button.classList.add('active');
+        // 更新当前样式
+        const styleMap = {
+            '标准本土化': 'standard',
+            '幽默游戏化': 'humorous',
+            '学术严谨化': 'academic',
+            '正式官方化': 'formal',
+            '口语化': 'colloquial'
+        };
+        this.currentStyle = styleMap[button.textContent];
+        console.log('Style changed to:', this.currentStyle);
+    }
+
     async handleTranslation() {
         const text = this.elements.inputText.value;
         if (!text.trim()) return;
 
         try {
             const requestData = this.buildPrompt(text);
+            // 打印请求数据
+            console.log('Translation request:', {
+                style: requestData.style,
+                text: requestData.text
+            });
+
             const response = await fetch('/api/translate', {
                 method: 'POST',
                 headers: {
