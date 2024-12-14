@@ -12,6 +12,7 @@ class TranslationApp {
         this.initializeElements();
         this.bindEvents();
         this.currentStyle = 'standard';
+        this.currentDirection = 'zh2en'; // 默认中译英
         this.updateHistoryDisplay();
     }
 
@@ -64,6 +65,20 @@ class TranslationApp {
         console.log('Style changed to:', this.currentStyle);
     }
 
+    handleLanguageToggle(button) {
+        // 移除所有按钮的active类
+        this.elements.languageButtons.forEach(btn => btn.classList.remove('active'));
+        // 给点击的按钮添加active类
+        button.classList.add('active');
+        // 更新当前翻译方向
+        const directionMap = {
+            '中译英': 'zh2en',
+            '英译中': 'en2zh'
+        };
+        this.currentDirection = directionMap[button.textContent];
+        console.log('Translation direction changed to:', this.currentDirection);
+    }
+
     async handleTranslation() {
         const text = this.elements.inputText.value;
         if (!text.trim()) return;
@@ -99,9 +114,10 @@ class TranslationApp {
     }
 
     buildPrompt(text) {
-        // 发送风格类型和文本到后端
+        // 发送风格类型、翻译方向和文本到后端
         return {
             style: TRANSLATION_STYLES[this.currentStyle],
+            direction: this.currentDirection,
             text: text
         };
     }
