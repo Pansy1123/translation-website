@@ -1,58 +1,101 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRANS Pro</title>
+    <title>专业翻译助手</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>TRANS Pro</h1>
-            <div class="language-toggle">
-                <button class="active">中译英</button>
-                <button>英译中</button>
-            </div>
+        <header class="header">
+            <h1>专业翻译助手</h1>
         </header>
-
-        <div class="translation-styles">
-            <button class="style-btn active">标准本土化</button>
-            <button class="style-btn">幽默游戏化</button>
-            <button class="style-btn">学术严谨化</button>
-            <button class="style-btn">正式官方化</button>
-            <button class="style-btn">口语化</button>
-        </div>
-
-        <main>
-            <div class="translation-container">
-                <div class="input-section">
-                    <textarea placeholder="请输入要翻译的文本..."></textarea>
+        
+        <div class="style-section">
+            <div class="style-options">
+                <div class="style-card" data-style="technical">
+                    <h3>技术文档</h3>
+                    <ul>
+                        <li>严格遵守技术术语规范</li>
+                        <li>保持逻辑性和准确性</li>
+                        <li>使用清晰的结构</li>
+                        <li>确保专业术语的一致性</li>
+                    </ul>
                 </div>
-                <button class="translate-btn">Duang~</button>
-                <div class="output-section">
-                    <textarea readonly placeholder="翻译结果将在这里显示..."></textarea>
-                    <button class="copy-btn">复制结果</button>
+                <div class="style-card" data-style="academic">
+                    <h3>学术翻译</h3>
+                    <ul>
+                        <li>使用规范的学术用语</li>
+                        <li>保持专业术语的准确性</li>
+                        <li>维持严谨的学术风格</li>
+                        <li>注意引用和参考文献的格式</li>
+                    </ul>
+                </div>
+                <div class="style-card" data-style="business">
+                    <h3>商务翻译</h3>
+                    <ul>
+                        <li>使用专业的商务术语</li>
+                        <li>保持礼貌和正式的语气</li>
+                        <li>确保数据和信息的准确性</li>
+                        <li>注意商务文件的格式规范</li>
+                    </ul>
+                </div>
+                <div class="style-card" data-style="game">
+                    <h3>游戏翻译</h3>
+                    <ul>
+                        <li>使用生动有趣的表达</li>
+                        <li>适应游戏场景需求</li>
+                        <li>保持轻松活泼的语气</li>
+                        <li>注意文化本地化</li>
+                    </ul>
+                </div>
+                <div class="style-card" data-style="official">
+                    <h3>公文翻译</h3>
+                    <ul>
+                        <li>使用规范的公文用语</li>
+                        <li>保持庄重严肃的语气</li>
+                        <li>遵循公文写作格式</li>
+                        <li>确保表述准确规范</li>
+                    </ul>
                 </div>
             </div>
-        </main>
-
-        <div class="history-section">
-            <h2>翻译历史</h2>
-            <button class="show-history-btn">查看历史记录</button>
         </div>
 
-        <!-- 添加历史记录弹窗 -->
-        <div class="history-modal" id="historyModal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>翻译历史记录</h2>
-                <div class="history-list">
-                    <!-- 历史记录将在这里动态生成 -->
-                </div>
+        <div class="direction-control">
+            <select id="direction">
+                <option value="zh2en">中文 → 英文</option>
+                <option value="en2zh">英文 → 中文</option>
+            </select>
+        </div>
+
+        <div class="translation-area">
+            <div class="input-area">
+                <label>输入文本</label>
+                <textarea id="inputText" placeholder="请输入要翻译的文本，最长1000字"></textarea>
+            </div>
+            
+            <div class="output-area">
+                <label>翻译结果</label>
+                <textarea id="outputText" readonly></textarea>
             </div>
         </div>
+
+        <div class="buttons">
+            <button id="translateBtn" class="primary-btn">翻译</button>
+            <button id="copyBtn" class="secondary-btn">复制结果</button>
+            <button id="clearBtn" class="danger-btn">清空</button>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <span>正在翻译中...</span>
+        </div>
+
+        <footer class="feedback">
+            <p>Feedback: <a href="mailto:ebullientcat1123@gmail.com">ebullientcat1123@gmail.com</a></p>
+        </footer>
     </div>
+
     <script src="/js/script.js"></script>
 </body>
 </html> 

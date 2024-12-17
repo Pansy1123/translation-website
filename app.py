@@ -23,7 +23,7 @@ class TranslationService:
 
     def build_messages(self, style, direction, text):
         # 构建完整的 prompt
-        style_prompt = prompt_template.get(style, prompt_template['local'])
+        style_prompt = prompt_template.get(style, prompt_template['official'])
         direction_text = "任务目标：中译英" if direction == "zh2en" else "任务目标：英译中"
         full_system_prompt = f"{direction_text}\n\n{system_prompt}\n\n{style_prompt}"
         
@@ -52,12 +52,12 @@ translation_service = TranslationService()
 def index():
     return render_template('index.html')
 
-@app.route('/api/translate', methods=['POST'])
+@app.route('/translate', methods=['POST'])
 def translate():
     try:
         data = request.json
         text = data.get('text')
-        style = data.get('style', 'local')
+        style = data.get('style', 'official')
         direction = data.get('direction', 'zh2en')  # 默认中译英
         
         # 打印接收到的请求数据
@@ -74,13 +74,17 @@ def translate():
             print(f"Content: {msg['content']}\n")
 
         translation = translation_service.translate(style, direction, text)
-        return jsonify({'translation': translation})
 
+        return jsonify({
+            'success': True,
+            'translation': translation
+        })
     except Exception as e:
-        print(f"Error during translation: {str(e)}")
-        return jsonify({'error': str(e)}), 500
+        print(f"Translation error: {str(e)}")
+        return jsonify({
+            'success': False,
+            'error': str(e)
+        }), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-# https://github.com/chatanywhere/GPT_API_free?tab=readme-ov-file
